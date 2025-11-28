@@ -9,7 +9,7 @@ $dbname = '';
 $user = '';  
 $password = '';    #変更箇所 
 
-$conn_string = "host=$host port=$port dbname=$dbname user=$username password=$password";  #psql用
+$conn_string = "host=$host dbname=$dbname user=$user password=$password";  #psql用
 $dbconn = null;
 
 $response = ['success' => false, 'data' => null, 'message' => ''];
@@ -18,7 +18,7 @@ try {
     $dbconn = @pg_connect($conn_string);
 
     if (!$dbconn) {
-        throw new Exception("データベースに接続できません。接続文字列を確認してください。");
+        throw new Exception("データベースに接続できません。");
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,7 +58,7 @@ function handlePostRequest($dbconn, array &$response) {
 
     $clothesIdsJson = json_encode($clothesIds);
 
-    $sql = "INSERT INTO テーブル名 (user_id, coordinate_date, clothes_ids_json)   #変更箇所
+    $sql = "INSERT INTO daily_coordinates (user_id, coordinate_date, clothes_ids_json)   #変更箇所
             VALUES ($1, $2, $3)";
 
    if (!pg_prepare($dbconn, "insert_query", $sql)) {
@@ -136,7 +136,6 @@ function handleGetRequest($dbconn, array &$response) {
             throw new Exception("SQL(clothes)の準備に失敗: " . pg_last_error($dbconn));
         }
 
-        // execute には ID の配列 (インデックスが 0 から始まる) を渡す
         $result_clothes = pg_execute($dbconn, "select_clothes", array_values($unique_clothes_ids));
         
         if (!$result_clothes) {
