@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Stylist - 今日の服装相談</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <style>
+        .main-container {
+            padding: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .question-section {
+            margin: 2em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui container main-container">
+        <h1 class="ui header">
+            <i class="tshirt icon"></i>
+            <div class="content">
+                AI Stylist
+                <div class="sub header">今日の服装をAIがアドバイスします</div>
+            </div>
+        </h1>
+
+        <div class="question-section">
+            <form class="ui form">
+                <div class="field">
+                    <label>性別</label>
+                    <select class="ui dropdown" id="gender">
+                        <option value="">選択してください</option>
+                        <option value="male">男性</option>
+                        <option value="female">女性</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>年齢</label>
+                    <input type="number" id="age" placeholder="年齢を入力してください">
+                </div>
+
+                <div class="field">
+                    <label>場所・目的</label>
+                    <input type="text" id="purpose" placeholder="例: オフィス、デート、買い物など">
+                </div>
+
+                <div class="field">
+                    <label>好みのスタイル</label>
+                    <select class="ui dropdown" id="style">
+                        <option value="">選択してください</option>
+                        <option value="casual">カジュアル</option>
+                        <option value="formal">フォーマル</option>
+                        <option value="sporty">スポーティー</option>
+                        <option value="elegant">エレガント</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>その他の要望</label>
+                    <textarea id="additional" rows="3" placeholder="その他の要望があればご記入ください"></textarea>
+                </div>
+
+                <button class="ui primary button" type="submit">AIに相談する</button>
+            </form>
+        </div>
+
+        <div class="ui segment" id="result" style="display: none;">
+            <h3 class="ui header">AIからのアドバイス</h3>
+            <div class="ui divider"></div>
+            <div id="advice-content"></div>
+        </div>
+    </div>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+
+        $('.ui.form').on('submit', function(e) {
+            e.preventDefault();
+            $(this).addClass('loading');
+
+            const formData = {
+                gender: $('#gender').val(),
+                age: $('#age').val(),
+                purpose: $('#purpose').val(),
+                style: $('#style').val(),
+                additional: $('#additional').val()
+            };
+
+            // AIの応答を後で実装するため、ここでは空のまま表示
+            setTimeout(() => {
+                $('#result').show();
+                $('#advice-content').html("");  // ← サンプルデータ削除済み
+                $('.ui.form').removeClass('loading');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
