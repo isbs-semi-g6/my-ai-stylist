@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+
+    <title>
+      ログインフォーム
+    </title>
+
+    <style>
+
+      body {
+        background-color: #fffafa;
+      }
+
+      .all {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      p {
+        margin-left: 20px;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <h1>テスト ログイン</h1>
+
+    <div class="all">
+      <form method="POST" action="./registar-clothes.php">
+      名前:<input type="text" name="username" size="40"><br>
+      メールアドレス:<input type="text" name="email" size="40"><br>
+      パスワード:<input type="password" name="pwf" size="40"><br>
+      <input type="submit">
+      </form>
+      <p>*はじめての方は<a href="./regform.html">こちら</a>から登録してください。</p>
+    </div>
+  </body>
+</html>
