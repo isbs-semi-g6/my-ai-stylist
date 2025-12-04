@@ -14,13 +14,13 @@ try {
     $offset = ($page - 1) * $per_page;
 
     // 総件数取得
-    $sql = "SELECT COUNT(*) FROM ai_stylist_ask_result WHERE user_id = $1";
+    $sql = "SELECT COUNT(*) FROM ask_result WHERE user_id = $1";
     $result = pg_query_params($dbconn, $sql, array(getUserId()));
     $total_count = pg_fetch_result($result, 0, 0);
     $total_pages = ceil($total_count / $per_page);
 
     // 履歴データ取得
-    $sql = "SELECT * FROM ai_stylist_ask_result
+    $sql = "SELECT * FROM ask_result
             WHERE user_id = $1
             ORDER BY created_at DESC
             LIMIT $2 OFFSET $3";
@@ -31,9 +31,9 @@ try {
     $outfits = array();
     foreach ($history as $h) {
         $sql = "SELECT ari.*, c.*, i.image_url
-                FROM ai_stylist_ask_result_items ari
-                LEFT JOIN ai_stylist_clothes c ON ari.clothes_id = c.id
-                LEFT JOIN ai_stylist_images i ON c.image_id = i.id
+                FROM ask_result_items ari
+                LEFT JOIN clothes c ON ari.clothes_id = c.id
+                LEFT JOIN images i ON c.image_id = i.id
                 WHERE ari.ask_result_id = $1
                 ORDER BY ari.item_order";
         $items_result = pg_query_params($dbconn, $sql, array($h['id']));

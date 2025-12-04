@@ -129,8 +129,8 @@ function getWeatherData($latitude, $longitude) {
  */
 function getUserClothes($user_id, $dbconn) {
     $sql = "SELECT c.*, i.image_url
-            FROM ai_stylist_clothes c
-            LEFT JOIN ai_stylist_images i ON c.image_id = i.id
+            FROM clothes c
+            LEFT JOIN images i ON c.image_id = i.id
             WHERE c.user_id = $1
             ORDER BY c.created_at DESC";
     $result = pg_query_params($dbconn, $sql, array($user_id));
@@ -266,7 +266,7 @@ function saveResult($user_id, $user_input, $weather_data, $ai_response, $clothes
 
     try {
         // ask_resultに保存
-        $sql = "INSERT INTO ai_stylist_ask_result
+        $sql = "INSERT INTO ask_result
                 (user_id, prompt, weather, temperature, occasion, ai_response)
                 VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING id";
@@ -286,7 +286,7 @@ function saveResult($user_id, $user_input, $weather_data, $ai_response, $clothes
         $item_order = 1;
         foreach ($ai_response['items'] as $item) {
             // clothes_idを検索（完全一致するものを探す）
-            $sql = "SELECT id FROM ai_stylist_clothes
+            $sql = "SELECT id FROM clothes
                     WHERE user_id = $1
                     AND garment_type = $2
                     AND color = $3
@@ -318,7 +318,7 @@ function saveResult($user_id, $user_input, $weather_data, $ai_response, $clothes
                 continue;
             }
 
-            $sql = "INSERT INTO ai_stylist_ask_result_items
+            $sql = "INSERT INTO ask_result_items
                     (ask_result_id, clothes_id, item_order, item_type, ai_reason)
                     VALUES ($1, $2, $3, $4, $5)";
             pg_query_params($dbconn, $sql, [

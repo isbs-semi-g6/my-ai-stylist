@@ -29,7 +29,7 @@ elseif (isset($username) && isset($pwf1)){
   }
 
   // usernameが既に登録されているか確認するSQL（プリペアドステートメント使用）
-  $sql = "SELECT * FROM ai_stylist_users WHERE username = $1";
+  $sql = "SELECT * FROM users WHERE username = $1";
   $result = pg_query_params($dbconn, $sql, array($username))
       or die('Query failed: ' . pg_last_error());
 
@@ -39,7 +39,7 @@ elseif (isset($username) && isset($pwf1)){
     $npwh=password_hash($npw, PASSWORD_BCRYPT);
 
     // INSERT文もプリペアドステートメント使用
-    $sql = "INSERT INTO ai_stylist_users(username, email, password_hash) VALUES ($1, $2, $3)";
+    $sql = "INSERT INTO users(username, email, password_hash) VALUES ($1, $2, $3)";
     pg_query_params($dbconn, $sql, array($username, $email, $npwh))
         or die('Query failed: ' . pg_last_error());
 

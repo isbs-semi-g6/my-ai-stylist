@@ -17,7 +17,7 @@ if (isset($_POST['username']) && isset($_POST['pwf'])) {
     $pwf = $_POST['pwf'];
 
     // ユーザー名でユーザー検索
-    $sql = "SELECT * FROM ai_stylist_users WHERE username = $1";
+    $sql = "SELECT * FROM users WHERE username = $1";
     $result = pg_query_params($dbconn, $sql, array($username));
     $user = pg_fetch_assoc($result);
 
@@ -82,7 +82,7 @@ if (isset($_POST['send'])) {
                 $result = move_uploaded_file($_FILES["image_url"]["tmp_name"], $image_url);
                 if($result === true){
                     // RETURNING id：データを挿入し、さらに挿入されたレコードの id を返す
-                    $sql = "INSERT INTO ai_stylist_images (user_id, image_url) VALUES ($1, $2) RETURNING id";
+                    $sql = "INSERT INTO images (user_id, image_url) VALUES ($1, $2) RETURNING id";
                     $params = array($_SESSION['id'], $nfn);
                     $result = pg_query_params($dbconn, $sql, $params);
                     if ($result) {
@@ -106,7 +106,7 @@ if (isset($_POST['send'])) {
 
         // データベースに登録
         // SQLインジェクション対策としてプリペアドステートメントを使用
-        $query = "INSERT INTO ai_stylist_clothes (user_id, image_id, garment_type, color, fabric, pattern, season, neckline, sleeve_length)
+        $query = "INSERT INTO clothes (user_id, image_id, garment_type, color, fabric, pattern, season, neckline, sleeve_length)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
         
         // パラメータの配列を作成
@@ -210,7 +210,7 @@ if (isset($_POST['send'])) {
             <div class="ui grid">
                 <div class="sixteen wide column">
                     <?php
-                    $sql = "SELECT image_url FROM ai_stylist_images WHERE user_id = $1 ORDER BY id DESC";
+                    $sql = "SELECT image_url FROM images WHERE user_id = $1 ORDER BY id DESC";
                     $result = pg_query_params($dbconn, $sql, array($_SESSION['id']));
                     if ($result): ?>
                         <div class="ui images">

@@ -17,7 +17,7 @@ try {
     $dbconn = getDbConnection();
 
     // 提案結果を取得（ユーザー本人のもののみ）
-    $sql = "SELECT * FROM ai_stylist_ask_result WHERE id = $1 AND user_id = $2";
+    $sql = "SELECT * FROM ask_result WHERE id = $1 AND user_id = $2";
     $result = pg_query_params($dbconn, $sql, array($ask_result_id, getUserId()));
     $ask_result = pg_fetch_assoc($result);
 
@@ -27,9 +27,9 @@ try {
 
     // 提案された服を取得
     $sql = "SELECT ari.*, c.*, i.image_url
-            FROM ai_stylist_ask_result_items ari
-            LEFT JOIN ai_stylist_clothes c ON ari.clothes_id = c.id
-            LEFT JOIN ai_stylist_images i ON c.image_id = i.id
+            FROM ask_result_items ari
+            LEFT JOIN clothes c ON ari.clothes_id = c.id
+            LEFT JOIN images i ON c.image_id = i.id
             WHERE ari.ask_result_id = $1
             ORDER BY ari.item_order";
     $result = pg_query_params($dbconn, $sql, array($ask_result_id));
