@@ -1,9 +1,15 @@
 <?php
-session_start();
+require_once 'includes/config.php';
+require_once 'includes/auth.php';
+
+startSession();
 
 // DB接続
-$dbconn = pg_connect("host=localhost dbname=xxx user=xxx password=xxx")
-    or die('Could not connect: ' . pg_last_error());
+try {
+    $dbconn = getDbConnection();
+} catch (Exception $e) {
+    die('データベース接続エラー: ' . $e->getMessage());
+}
 
 // POSTを取得
 if (isset($_POST['username']) && isset($_POST['pwf'])) {

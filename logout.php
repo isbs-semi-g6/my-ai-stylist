@@ -1,6 +1,7 @@
 <?php
-session_start();
-session_destroy();
-header('location: ./login.html');
+require_once 'includes/auth.php';
 
+logout();
+header('Location: ./login.html');
+exit;
 ?>

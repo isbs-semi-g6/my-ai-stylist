@@ -1,1 +1,6 @@
 .DS_Store
+.env
+uploads/*
+!uploads/.gitkeep
+.vscode/
+.claude/
