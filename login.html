@@ -1,48 +1,89 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Style-Type" content="text/css">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ログインフォーム</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: "Helvetica", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-    <title>
-      ログインフォーム
-    </title>
+    .login-box {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
 
-    <style>
+    .login-box h1 {
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #333;
+    }
 
-      body {
-        background-color: #fffafa;
-      }
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
 
-      .all {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+    .login-box input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background: #eb9cd3;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-      form {
-        display: flex;
-        flex-direction: column;
-      }
+    .login-box input[type="submit"]:hover {
+      background: #45a049;
+    }
 
-      p {
-        margin-left: 20px;
-      }
+    .login-box p {
+      margin-top: 15px;
+      font-size: 14px;
+    }
 
-    </style>
+    .login-box a {
+      color: #0066cc;
+      text-decoration: none;
+    }
 
-  </head>
-  <body>
-    <h1>テスト ログイン</h1>
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
 
-    <div class="all">
-      <form method="POST" action="./registar-clothes.php">
-      名前:<input type="text" name="username" size="40"><br>
-      メールアドレス:<input type="text" name="email" size="40"><br>
-      パスワード:<input type="password" name="pwf" size="40"><br>
-      <input type="submit">
-      </form>
-      <p>*はじめての方は<a href="./regform.html">こちら</a>から登録してください。</p>
-    </div>
-  </body>
+<body>
+
+  <div class="login-box">
+    <h1>ログイン</h1>
+
+    <form method="POST" action="./registar-clothes.php">
+      <input type="text" name="username" placeholder="名前">
+      <input type="text" name="email" placeholder="メールアドレス">
+      <input type="password" name="pwf" placeholder="パスワード">
+      <input type="submit" value="ログイン">
+    </form>
+
+    <p>はじめての方は <a href="./regform.html">こちら</a></p>
+  </div>
+
+</body>
 </html>

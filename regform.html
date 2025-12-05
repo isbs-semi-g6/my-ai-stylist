@@ -1,47 +1,84 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Style-Type" content="text/css">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新規登録フォーム</title>
 
-    <title>
-      新規登録フォーム
-    </title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: "Helvetica", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-    <style>
+    .register-box {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 360px;
+      text-align: center;
+    }
 
-      body {
-        background-color: #fffafa;
-      }
+    .register-box h1 {
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #333;
+    }
 
-      .all {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+    .register-box input[type="text"],
+    .register-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
 
-      form {
-        display: flex;
-        flex-direction: column;
-      }
+    .register-box input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background: #eb9cd3;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
-      p {
-        margin-left: 20px;
-      }
+    .register-box input[type="submit"]:hover {
+      background: #45a049;
+    }
 
-    </style>
+    .note {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
 
-  </head>
-  <body>
+<body>
+
+  <div class="register-box">
     <h1>新規登録</h1>
-    <div class="all">
-      <form method="POST" action="./regform.php">
-        名前: <input type="text" name="username" size="40"><br>
-        メールアドレス: <input type="text" name="email" size="40"><br>
-        パスワード: <input type="password" name="pwf1" size="40"><br>
-        パスワード: <input type="password" name="pwf2" size="40">(確認)<br>
-        <input type="submit" value="登録">
-      </form>
-    </div>
-  </body>
+
+    <form method="POST" action="./regform.php">
+      <input type="text" name="username" placeholder="名前" required>
+      <input type="text" name="email" placeholder="メールアドレス" required>
+      <input type="password" name="pwf1" placeholder="パスワード" required>
+      <input type="password" name="pwf2" placeholder="パスワード（確認）" required>
+
+      <input type="submit" value="登録">
+    </form>
+
+  </div>
+
+</body>
 </html>
